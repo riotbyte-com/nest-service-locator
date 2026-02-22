@@ -22,5 +22,5 @@
     "allowJs": true,
     "lib": ["decorators", "dom", "es5", "scripthost", "es2015.symbol"]
   },
-  "exclude": ["tests", "dist"]
+  "exclude": ["tests", "dist", "vitest.config.ts"]
 }
