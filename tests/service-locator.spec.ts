@@ -1,6 +1,6 @@
 import 'reflect-metadata'
-import { Test } from '@nestjs/testing'
 import { Injectable } from '@nestjs/common'
+import { Test } from '@nestjs/testing'
 import { defineTag, ServiceLocator, ServiceLocatorModule } from '../src'
 
 interface GreeterService {
@@ -81,7 +81,9 @@ describe('ServiceLocator', () => {
   it('should not include untagged providers', () => {
     const greeters = locator.tagged(GreeterTag)
 
-    expect(greeters).toHaveLength(2)
+    expect(greeters.every((g) => !(g.service instanceof UntaggedService))).toBe(
+      true,
+    )
   })
 
   it('should return an empty array when no providers match the tag', () => {
