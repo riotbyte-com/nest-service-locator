@@ -9,7 +9,6 @@
       "url": "https://github.com/nusje2000"
     }
   ],
-  "prettier": "@riotbyte/prettier-config",
   "license": "MIT",
   "type": "commonjs",
   "main": "dist/src/index.js",
@@ -19,25 +18,23 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "test": "vitest run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0 || ^10.0.0 || ^11.0.0",
     "@nestjs/core": "^9.0.0 || ^10.0.0 || ^11.0.0"
   },
   "devDependencies": {
-    "@riotbyte/eslint-config": "^0.1.2",
-    "@riotbyte/prettier-config": "^0.1.0",
+    "@nestjs/testing": "^11.0.0",
+    "@swc/core": "^1.15.11",
     "@types/node": "^20.10.0",
-    "eslint": "^8.54.0",
-    "prettier": "^3.1.0",
-    "typescript": "^5.1.6"
+    "reflect-metadata": "^0.2.0",
+    "typescript": "^5.1.6",
+    "unplugin-swc": "^1.5.9",
+    "vitest": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mokkenstorm-Technology/nest-service-locator"
+    "url": "https://github.com/riotbyte-com/nest-service-locator"
   }
 }
