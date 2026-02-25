@@ -11,7 +11,7 @@ export type TagDefinition<TTarget extends object, TMetadata extends object> = {
   make(metadata: TMetadata): Tag<TMetadata>
   decorator(
     metadata: TMetadata,
-  ): (target: new (...args: unknown[]) => TTarget) => void
+  ): (target: new (...args: any[]) => TTarget) => void
 }
 
 export function defineTag<
