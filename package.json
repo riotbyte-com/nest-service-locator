@@ -1,5 +1,5 @@
 {
-  "name": "@riotbyte/nest-service-locator",
+  "name": "@riotbyte-com/nest-service-locator",
   "version": "0.3.0-rc.3",
   "description": "NestJS tag based service locator",
   "contributors": [

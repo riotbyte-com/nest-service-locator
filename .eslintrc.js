@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@riotbyte/eslint-config'],
+  extends: ['@riotbyte-com/eslint-config'],
 }
