@@ -1,41 +1,46 @@
-name: Publish Package to npmjs
+name: Publish Package
+
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'The desired version that should be created (format: <major>.<minor>.<fix>).'
-        type: string
-        required: true
+  push:
+    tags:
+      - 'v*'
+
 permissions:
-  contents: write
+  contents: read
+  id-token: write
+
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Validate version format'
-        run: echo "${RELEASE_VERSION}" | grep -Eq ^[0-9]+\.[0-9]+\.[0-9]+$
-        env:
-          RELEASE_VERSION: ${{ github.event.inputs.version }}
       - uses: actions/checkout@v4
-      - run: |
-          git config --global user.name 'Riot Byte'
-          git config --global user.email 'riotbyte@users.noreply.github.com'
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Set version from tag
+        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version
+      - run: pnpm install
+      - run: pnpm check
+      - run: pnpm build
+      - run: pnpm test
+
+  publish-npm:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
-      - run: npm run lint
-      - run: npm run prettier:check
-      - run: npm run build
-      - run: npm version $RELEASE_VERSION
-        env:
-          RELEASE_VERSION: ${{ github.event.inputs.version }}
-      - name: Push new version
-        run: |
-          git push --tags
-        env:
-          RELEASE_VERSION: ${{ github.event.inputs.version }}
-      - run: npm publish --access public
+          cache: 'pnpm'
+      - name: Set version from tag
+        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm publish --access public --no-git-checks --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

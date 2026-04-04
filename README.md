@@ -9,7 +9,7 @@ where a service uses a collection of different implementations.
 To define a new tag, you need to call the defineTag function:
 
 ```typescript
-import { defineTag } from '@riotbyte/nest-service-locator'
+import { defineTag } from '@riotbyte-com/nest-service-locator'
 
 export const MyTag = defineTag('my-tag-name')
 ```
@@ -47,7 +47,7 @@ class MyTaggedClass {}
 By default, the tag can be applied to any class. If a tag is expected to only be applied to a specific interface or type, you can define a tag like this:
 
 ```typescript
-import { defineTag } from '@riotbyte/nest-service-locator'
+import { defineTag } from '@riotbyte-com/nest-service-locator'
 
 export const MyTag = defineTag<object, MyInterface>('my-tag-name')
 ```
@@ -71,7 +71,7 @@ class Y {}
 Tagged services and their metadata can be retrieved using the service locator:
 
 ```typescript
-import { ServiceLocator, TaggedService } from '@riotbyte/nest-service-locator'
+import { ServiceLocator, TaggedService } from '@riotbyte-com/nest-service-locator'
 
 class GroupGreeter {
   constructor(private readonly locator: ServiceLocator) {}
