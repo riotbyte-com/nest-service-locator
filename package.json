@@ -24,11 +24,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "packageManager": "pnpm@10.29.1",
   "engines": {
     "node": ">= 22.0.0"
   },
   "scripts": {
     "build": "tsc",
+    "prepare": "tsc",
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "check": "biome check && pnpm typecheck"
@@ -55,5 +57,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/riotbyte-com/nest-service-locator"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild"
+    ]
   }
 }
