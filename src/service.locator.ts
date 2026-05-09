@@ -1,8 +1,8 @@
-import { DiscoveryService, Reflector } from '@nestjs/core'
-import { Tag, TagDefinition } from './tag'
-import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
-import { TAG_METADATA_KEY } from './metadata'
 import { Injectable } from '@nestjs/common'
+import { DiscoveryService, Reflector } from '@nestjs/core'
+import type { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper'
+import { TAG_METADATA_KEY } from './metadata'
+import type { Tag, TagDefinition } from './tag'
 
 export type TaggedService<TTarget extends object, TMetadata extends object> = {
   service: TTarget
@@ -21,10 +21,9 @@ export class ServiceLocator {
   ): TaggedService<TTarget, TMetadata>[] {
     return this.discovery
       .getProviders()
-      .map<TaggedService<TTarget, TMetadata>[]>((wrapper) => {
-        return this.getTaggedService(tag, wrapper)
-      })
-      .flat()
+      .flatMap<TaggedService<TTarget, TMetadata>>((wrapper) =>
+        this.getTaggedService(tag, wrapper),
+      )
   }
 
   private getTaggedService<TTarget extends object, TMetadata extends object>(
