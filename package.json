@@ -1,43 +1,67 @@
 {
-  "name": "@riotbyte/nest-service-locator",
-  "version": "0.0.0",
+  "name": "@riotbyte-com/nest-service-locator",
+  "version": "0.3.0-rc.3",
   "description": "NestJS tag based service locator",
   "contributors": [
     {
       "name": "Maarten Nusteling",
       "email": "maarten@nusteling.solutions",
       "url": "https://github.com/nusje2000"
+    },
+    {
+      "name": "Niels Mokkenstorm",
+      "email": "niels@mokkenstorm.dev",
+      "url": "https://github.com/nmokkenstorm"
     }
   ],
-  "prettier": "@riotbyte/prettier-config",
   "license": "MIT",
   "type": "commonjs",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "packageManager": "pnpm@10.29.1",
   "engines": {
-    "node": ">= 18.0.0"
+    "node": ">= 22.0.0"
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "prepare": "tsc",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "check": "biome check && pnpm typecheck"
   },
-  "dependencies": {
-    "@nestjs/common": "^9.0.0 || ^10.0.0 || ^11.0.0",
-    "@nestjs/core": "^9.0.0 || ^10.0.0 || ^11.0.0"
+  "dependencies": {},
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0 || ^11.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0",
+    "reflect-metadata": "^0.1.13 || ^0.2.0"
   },
   "devDependencies": {
-    "@riotbyte/eslint-config": "^0.1.2",
-    "@riotbyte/prettier-config": "^0.1.0",
-    "@types/node": "^20.10.0",
-    "eslint": "^8.54.0",
-    "prettier": "^3.1.0",
-    "typescript": "^5.1.6"
+    "@biomejs/biome": "^2.3.6",
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/testing": "^11.0.0",
+    "@swc/core": "^1.15.11",
+    "@types/node": "^22.0.0",
+    "reflect-metadata": "^0.2.0",
+    "typescript": "^5.1.6",
+    "unplugin-swc": "^1.5.9",
+    "vite": "^7.0.0",
+    "vitest": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mokkenstorm-Technology/nest-service-locator"
+    "url": "https://github.com/riotbyte-com/nest-service-locator"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild"
+    ]
   }
 }
