@@ -22,7 +22,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "packageManager": "pnpm@10.29.1",
   "engines": {
