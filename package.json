@@ -29,7 +29,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "check": "biome check"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "check": "biome check && pnpm typecheck"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -39,8 +41,16 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.6",
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/testing": "^11.0.0",
+    "@swc/core": "^1.15.11",
     "@types/node": "^22.0.0",
-    "typescript": "^5.1.6"
+    "reflect-metadata": "^0.2.0",
+    "typescript": "^5.1.6",
+    "unplugin-swc": "^1.5.9",
+    "vite": "^7.0.0",
+    "vitest": "^3.0.0"
   },
   "repository": {
     "type": "git",
