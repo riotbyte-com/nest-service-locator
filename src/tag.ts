@@ -11,7 +11,8 @@ export type TagDefinition<TTarget extends object, TMetadata extends object> = {
   make(metadata: TMetadata): Tag<TMetadata>
   decorator(
     metadata: TMetadata,
-  ): (target: new (...args: unknown[]) => TTarget) => void
+    // biome-ignore lint/suspicious/noExplicitAny: any[] is required for decorator compatibility with classes that have typed constructor params
+  ): (target: new (...args: any[]) => TTarget) => void
 }
 
 export function defineTag<

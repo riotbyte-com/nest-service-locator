@@ -42,4 +42,16 @@ describe('defineTag', () => {
 
     expect(Reflect.getMetadata(TAG_METADATA_KEY, Bare)).toBeUndefined()
   })
+
+  it('should accept classes with strongly-typed constructor params', () => {
+    class Dependency {}
+    const tag = defineTag<{ kind: string }>('typed-ctor')
+
+    @tag.decorator({ kind: 'typed' })
+    class Consumer {
+      constructor(public readonly dep: Dependency) {}
+    }
+
+    expect(Reflect.getMetadata(TAG_METADATA_KEY, Consumer)).toHaveLength(1)
+  })
 })
