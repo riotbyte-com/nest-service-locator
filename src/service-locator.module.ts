@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common'
-import { DiscoveryModule } from '@nestjs/core'
+import { Global, Module } from '@nestjs/common'
+import { DiscoveryModule, Reflector } from '@nestjs/core'
 import { ServiceLocator } from './service.locator'
 
+@Global()
 @Module({
   imports: [DiscoveryModule],
-  providers: [ServiceLocator],
+  providers: [Reflector, ServiceLocator],
   exports: [ServiceLocator],
 })
 export class ServiceLocatorModule {}
