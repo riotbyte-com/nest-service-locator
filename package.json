@@ -44,7 +44,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.6",
     "@nestjs/common": "^11.0.0",
-    "@nestjs/core": "^11.0.0",
+    "@nestjs/core": "^11.1.18",
     "@nestjs/testing": "^11.0.0",
     "@swc/core": "^1.15.11",
     "@types/node": "^22.0.0",
